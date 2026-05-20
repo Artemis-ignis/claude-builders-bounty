@@ -6,37 +6,49 @@ The Claude Code sub-agent prompt lives in `claude-code-subagent.md`.
 
 ## Quick Start
 
-1. Run a review:
+1. Add the CLI to your PATH:
 
 ```bash
-agents/pr-review-agent/bin/claude-review --pr https://github.com/owner/repo/pull/123
+export PATH="$PWD/agents/pr-review-agent/bin:$PATH"
+```
+
+On Windows PowerShell:
+
+```powershell
+$env:Path = "$(Resolve-Path agents\pr-review-agent\bin);$env:Path"
+```
+
+2. Run a review:
+
+```bash
+claude-review --pr https://github.com/owner/repo/pull/123
 ```
 
 On Windows PowerShell, use:
 
 ```powershell
-agents\pr-review-agent\bin\claude-review.cmd --pr https://github.com/owner/repo/pull/123
+claude-review --pr https://github.com/owner/repo/pull/123
 ```
 
-2. Or review a local diff without network access:
+3. Or review a local diff without network access:
 
 ```bash
 python agents/pr-review-agent/claude_review.py --diff-file path/to/change.diff
 ```
 
-3. Save Markdown output:
+4. Save Markdown output:
 
 ```bash
 python agents/pr-review-agent/claude_review.py --pr https://github.com/owner/repo/pull/123 --save review.md
 ```
 
-4. Post the review as a PR comment:
+5. Post the review as a PR comment:
 
 ```bash
 GITHUB_TOKEN=ghp_xxx agents/pr-review-agent/bin/claude-review --pr https://github.com/owner/repo/pull/123 --post-comment
 ```
 
-5. Run tests:
+6. Run tests:
 
 ```bash
 python -m unittest tests/test_pr_review_agent.py
